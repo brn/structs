@@ -1,0 +1,31 @@
+{
+  "name": "structs",
+  "version": "0.0.0",
+  "description": "The data structure for javascript/node.js",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha --recursive && node perf-test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brn/structs.git"
+  },
+  "keywords": [
+    "node.js",
+    "structs",
+    "data",
+    "algorithm"
+  ],
+  "author": "Taketoshi Aono (brn)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brn/structs/issues"
+  },
+  "homepage": "https://github.com/brn/structs",
+  "dependencies": {
+    "colors": "^0.6.2"
+  }
+}
