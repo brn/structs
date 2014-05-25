@@ -56,4 +56,73 @@ describe('BinaryHeap', function() {
       assert.strictEqual(instance.length, 0);
     });
   });
+
+
+  describe('remove', function() {
+    it('remove item from heap.', function() {
+      var instance = init();
+      instance.insert(3);
+      instance.insert(6);
+      instance.insert(2);
+      instance.insert(10);
+      instance.insert(4);
+      instance.insert(1);
+
+      instance.insert(11);
+      instance.insert(24);
+      instance.insert(26);
+
+      instance.remove(11);
+      instance.remove(24);
+      instance.remove(26);
+      
+      assert.strictEqual(instance.length, 6);
+      assert.strictEqual(instance.takeRoot(), 10);
+      assert.strictEqual(instance.takeRoot(), 6);
+      assert.strictEqual(instance.takeRoot(), 4);
+      assert.strictEqual(instance.takeRoot(), 3);
+      assert.strictEqual(instance.takeRoot(), 2);
+      assert.strictEqual(instance.takeRoot(), 1);
+      assert.strictEqual(instance.length, 0);
+    });
+  });
+
+
+  describe('merge', function() {
+    it('is merge two heaps.', function() {
+      var instanceA = init();
+      instanceA.insert(3);
+      instanceA.insert(6);
+      instanceA.insert(2);
+      instanceA.insert(10);
+      instanceA.insert(4);
+      instanceA.insert(1);
+
+      var instanceB = init();
+      instanceB.insert(13);
+      instanceB.insert(16);
+      instanceB.insert(12);
+      instanceB.insert(110);
+      instanceB.insert(14);
+      instanceB.insert(11);
+
+      var ret = instanceA.merge(instanceB);
+      
+      
+      assert.strictEqual(ret.length, 12);
+      assert.strictEqual(ret.takeRoot(), 110);
+      assert.strictEqual(ret.takeRoot(), 16);
+      assert.strictEqual(ret.takeRoot(), 14);
+      assert.strictEqual(ret.takeRoot(), 13);
+      assert.strictEqual(ret.takeRoot(), 12);
+      assert.strictEqual(ret.takeRoot(), 11);
+      assert.strictEqual(ret.takeRoot(), 10);
+      assert.strictEqual(ret.takeRoot(), 6);
+      assert.strictEqual(ret.takeRoot(), 4);
+      assert.strictEqual(ret.takeRoot(), 3);
+      assert.strictEqual(ret.takeRoot(), 2);
+      assert.strictEqual(ret.takeRoot(), 1);
+      assert.strictEqual(ret.length, 0);
+    });
+  });
 });

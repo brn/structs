@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha --recursive && node perf-test"
+    "test": "mocha --recursive",
+    "start": "node perf-test"
   },
   "repository": {
     "type": "git",
