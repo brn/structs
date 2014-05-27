@@ -6,6 +6,7 @@
 'use strict';
 
 var BinomialHeap = require('../lib/binomial-heap');
+var assert = require('assert');
 
 
 describe('BinomialHeap', function() {
@@ -15,16 +16,29 @@ describe('BinomialHeap', function() {
       return new BinomialHeap();
     };
   });
+
+  var order = 10000;
+  function randomIntInc (low, high) {
+    return Math.floor(Math.random() * (high - low + 1) + low);
+  }
   
   describe('#insert()', function() {
     it('is insert element into heap.', function() {
       var instance = init();
-      instance.insert(3);
-      instance.insert(6);
-      instance.insert(2);
-      instance.insert(10);
-      instance.insert(4);
-      instance.insert(1);
+      var a = [];
+      for (var i = 0;i < 30; i++) {
+        var v = v = randomIntInc(0, order);
+        a.push(v);
+        instance.insert(v);
+      }
+      a.sort(function(a,b){return a > b? 1: a === b?0: -1});
+      var x = [];
+
+      for (i = 0; i < 30; i++) {
+        x.push(instance.pop());
+      }
+      assert.strictEqual(a.length, x.length);
+      assert.deepEqual(a, x);
     });
   });
 

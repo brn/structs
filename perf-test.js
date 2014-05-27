@@ -5,11 +5,15 @@
 
 
 var fs = require('fs');
+var async = require('async');
 
 var DIR = './perfs';
 
-fs.readdirSync(DIR).forEach(function(file) {
+
+async.forEachSeries(fs.readdirSync(DIR), function(file, cb) {
   if (/-perfs.js$/.test(file)) {
-    require(DIR + '/' + file);
+    require(DIR + '/' + file)(cb);
+  } else {
+    cb();
   }
 });

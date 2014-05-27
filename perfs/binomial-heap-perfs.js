@@ -3,7 +3,7 @@
  * @author Taketoshi Aono
  */
 
-var BinaryHeap = require('../lib/binary-heap');
+var BinomialHeap = require('../lib/binomial-heap');
 var perfHarness = require('./perf-harness');
 var order = require('./order');
 
@@ -15,36 +15,23 @@ function randomIntInc (low, high) {
 module.exports = function(cb) {
   perfHarness([
     {
-      name: '[binary-heap] random values',
+      name: '[binomial-heap] random values',
       test: function(cb) {
-        var instance = new BinaryHeap();
+        var instance = new BinomialHeap();
         for (var i = 0; i < order; i++) {
           instance.insert(randomIntInc(0, order));
         }
         for (i = 0; i < order; i++) {
-          instance.takeRoot();
+          instance.pop();
         }
         cb();
       }
     },
     {
-      name: '[binary-heap] ordered values',
-      test: function(cb) {
-        var instance = new BinaryHeap();
-        for (var i = 0; i < order; i++) {
-          instance.insert(i);
-        }
-        for (i = 0; i < order; i++) {
-          instance.takeRoot();
-        }
-        cb();
-      }
-    },
-    {
-      name: '[binary-heap] merge',
+      name: '[binomial-heap] merge',
       test: function(cb) {
         function createHeap() {
-          var instance = new BinaryHeap();
+          var instance = new BinomialHeap();
           for (var i = 0; i < order; i++) {
             instance.insert(randomIntInc(0, order));
           }
@@ -54,7 +41,7 @@ module.exports = function(cb) {
         var b = createHeap();
         a.merge(b);
         cb();
-      } 
+      }
     }
   ], cb);
 };
