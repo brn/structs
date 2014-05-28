@@ -28,6 +28,19 @@ module.exports = function(cb) {
       }
     },
     {
+      name: '[binomial-heap] ordered values',
+      test: function(cb) {
+        var instance = new BinomialHeap();
+        for (var i = 0; i < order; i++) {
+          instance.insert(i);
+        }
+        for (i = 0; i < order; i++) {
+          instance.pop();
+        }
+        cb();
+      }
+    },
+    {
       name: '[binomial-heap] merge',
       test: function(cb) {
         function createHeap() {

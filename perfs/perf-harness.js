@@ -5,7 +5,7 @@
 
 
 var colors = require('colors');
-var TEST_COUNT = 5;
+var TEST_COUNT = 10;
 
 
 module.exports = function(opt, cb) {
@@ -37,10 +37,9 @@ module.exports = function(opt, cb) {
 function runTest(name, fn, cb, end) {
   function loop(now) {
     console.log('[PERFORMANCE_TEST]'.green + ' Running performance test for ' + name + ' round ' + (now + 1));
-    var begin = getHrtime();
+    var hrtime = process.hrtime();
     fn(function() {
-      var endTime = getHrtime();
-      cb(endTime - begin);
+      cb(parseFloat(process.hrtime(hrtime).join('.')));
       if (now + 1 < TEST_COUNT) {
         setImmediate(loop.bind(null, now + 1));
       } else {
@@ -49,10 +48,5 @@ function runTest(name, fn, cb, end) {
     });
   }
   loop(0);
-}
-
-
-function getHrtime() {
-  return parseFloat(process.hrtime().join("."));
 }
 

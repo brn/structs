@@ -1,1 +1,1 @@
-module.exports = Math.pow(10, 4);
+module.exports = Math.pow(10, 5);
