@@ -43,25 +43,31 @@ describe('BinomialHeap', function() {
   });
 
 
-  // describe('#merge()', function() {
-  //   it('is insert element into heap.', function() {
-  //     var instanceA = init();
-  //     instanceA.insert(3);
-  //     instanceA.insert(6);
-  //     instanceA.insert(2);
-  //     instanceA.insert(10);
-  //     instanceA.insert(4);
-  //     instanceA.insert(1);
+  describe('#merge()', function() {
+    it('is insert element into heap.', function() {
+      var a = [];
+      var index = 30;
+      function createHeap() {
+        var instance = init();
+        for (var i = 0;i < index; i++) {
+          var v = v = randomIntInc(0, order);
+          a.push(v);
+          instance.insert(v);
+        }
+        return instance;
+      }
 
-  //     var instanceB = init();
-  //     instanceB.insert(3);
-  //     instanceB.insert(6);
-  //     instanceB.insert(2);
-  //     instanceB.insert(10);
-  //     instanceB.insert(4);
-  //     instanceB.insert(1);
-  //     var ret = instanceA.merge(instanceB);
-  //     //BinomialHeap.display(ret);
-  //   });
-  // });
+      var instanceA = createHeap();
+      var instanceB = createHeap();
+      var ret = instanceA.merge(instanceB);
+      a.sort(function(a,b){return a > b? 1: a === b?0: -1});
+      var x = [];
+
+      for (var i = 0; i < index * 2; i++) {
+        x.push(ret.pop());
+      }
+      assert.strictEqual(a.length, x.length);
+      assert.deepEqual(a, x);
+    });
+  });
 });

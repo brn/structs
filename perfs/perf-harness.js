@@ -37,9 +37,9 @@ module.exports = function(opt, cb) {
 function runTest(name, fn, cb, end) {
   function loop(now) {
     console.log('[PERFORMANCE_TEST]'.green + ' Running performance test for ' + name + ' round ' + (now + 1));
-    var hrtime = process.hrtime();
+    var before = process.hrtime();
     fn(function() {
-      cb(parseFloat(process.hrtime(hrtime).join('.')));
+      cb(gethrtime(before));
       if (now + 1 < TEST_COUNT) {
         setImmediate(loop.bind(null, now + 1));
       } else {
@@ -50,3 +50,9 @@ function runTest(name, fn, cb, end) {
   loop(0);
 }
 
+
+
+function gethrtime(before) {
+  var end = process.hrtime(before);
+  return (end[0] * 1e9 + end[1]) / 1e7;
+}

@@ -26,12 +26,12 @@ describe('BinaryHeap', function() {
       instance.insert(4);
       instance.insert(1);
       assert.strictEqual(instance.length, 6);
-      assert.strictEqual(instance.takeRoot(), 10);
-      assert.strictEqual(instance.takeRoot(), 6);
-      assert.strictEqual(instance.takeRoot(), 4);
-      assert.strictEqual(instance.takeRoot(), 3);
-      assert.strictEqual(instance.takeRoot(), 2);
-      assert.strictEqual(instance.takeRoot(), 1);
+      assert.strictEqual(instance.pop(), 10);
+      assert.strictEqual(instance.pop(), 6);
+      assert.strictEqual(instance.pop(), 4);
+      assert.strictEqual(instance.pop(), 3);
+      assert.strictEqual(instance.pop(), 2);
+      assert.strictEqual(instance.pop(), 1);
       assert.strictEqual(instance.length, 0);
     });
 
@@ -47,12 +47,12 @@ describe('BinaryHeap', function() {
       instance.insert(4);
       instance.insert(1);
       assert.strictEqual(instance.length, 6);
-      assert.strictEqual(instance.takeRoot(), 1);
-      assert.strictEqual(instance.takeRoot(), 2);
-      assert.strictEqual(instance.takeRoot(), 3);
-      assert.strictEqual(instance.takeRoot(), 4);
-      assert.strictEqual(instance.takeRoot(), 6);
-      assert.strictEqual(instance.takeRoot(), 10);
+      assert.strictEqual(instance.pop(), 1);
+      assert.strictEqual(instance.pop(), 2);
+      assert.strictEqual(instance.pop(), 3);
+      assert.strictEqual(instance.pop(), 4);
+      assert.strictEqual(instance.pop(), 6);
+      assert.strictEqual(instance.pop(), 10);
       assert.strictEqual(instance.length, 0);
     });
   });
@@ -77,12 +77,12 @@ describe('BinaryHeap', function() {
       instance.remove(26);
       
       assert.strictEqual(instance.length, 6);
-      assert.strictEqual(instance.takeRoot(), 10);
-      assert.strictEqual(instance.takeRoot(), 6);
-      assert.strictEqual(instance.takeRoot(), 4);
-      assert.strictEqual(instance.takeRoot(), 3);
-      assert.strictEqual(instance.takeRoot(), 2);
-      assert.strictEqual(instance.takeRoot(), 1);
+      assert.strictEqual(instance.pop(), 10);
+      assert.strictEqual(instance.pop(), 6);
+      assert.strictEqual(instance.pop(), 4);
+      assert.strictEqual(instance.pop(), 3);
+      assert.strictEqual(instance.pop(), 2);
+      assert.strictEqual(instance.pop(), 1);
       assert.strictEqual(instance.length, 0);
     });
   });
@@ -110,18 +110,18 @@ describe('BinaryHeap', function() {
       
       
       assert.strictEqual(ret.length, 12);
-      assert.strictEqual(ret.takeRoot(), 110);
-      assert.strictEqual(ret.takeRoot(), 16);
-      assert.strictEqual(ret.takeRoot(), 14);
-      assert.strictEqual(ret.takeRoot(), 13);
-      assert.strictEqual(ret.takeRoot(), 12);
-      assert.strictEqual(ret.takeRoot(), 11);
-      assert.strictEqual(ret.takeRoot(), 10);
-      assert.strictEqual(ret.takeRoot(), 6);
-      assert.strictEqual(ret.takeRoot(), 4);
-      assert.strictEqual(ret.takeRoot(), 3);
-      assert.strictEqual(ret.takeRoot(), 2);
-      assert.strictEqual(ret.takeRoot(), 1);
+      assert.strictEqual(ret.pop(), 110);
+      assert.strictEqual(ret.pop(), 16);
+      assert.strictEqual(ret.pop(), 14);
+      assert.strictEqual(ret.pop(), 13);
+      assert.strictEqual(ret.pop(), 12);
+      assert.strictEqual(ret.pop(), 11);
+      assert.strictEqual(ret.pop(), 10);
+      assert.strictEqual(ret.pop(), 6);
+      assert.strictEqual(ret.pop(), 4);
+      assert.strictEqual(ret.pop(), 3);
+      assert.strictEqual(ret.pop(), 2);
+      assert.strictEqual(ret.pop(), 1);
       assert.strictEqual(ret.length, 0);
     });
   });
