@@ -37,9 +37,13 @@ module.exports = function(opt, cb) {
 function runTest(name, fn, cb, end) {
   function loop(now) {
     console.log('[PERFORMANCE_TEST]'.green + ' Running performance test for ' + name + ' round ' + (now + 1));
-    var before = process.hrtime();
-    fn(function() {
-      cb(gethrtime(before));
+    var timer = new Timer();
+    timer.begin();
+    fn(timer, function() {
+      if (timer.isStoped()) {
+        throw new Error('Timer must be resumed');
+      }
+      cb(timer._end());
       if (now + 1 < TEST_COUNT) {
         setImmediate(loop.bind(null, now + 1));
       } else {
@@ -49,6 +53,41 @@ function runTest(name, fn, cb, end) {
   }
   loop(0);
 }
+
+
+function Timer() {
+  this._begin = process.hrtime();
+  this._stoped = false;
+  this._stopedAt = null;
+  this._paused = 0;
+}
+
+
+Timer.prototype.begin = function() {
+  this._begin = process.hrtime();
+};
+
+
+Timer.prototype.stop = function() {
+  this._stoped = true;
+  this._stopedAt = process.hrtime();
+};
+
+
+Timer.prototype.resume = function() {
+  if (!this._stoped) return;
+  this._stoped = false;
+  this._paused += gethrtime(this._stopedAt);
+};
+
+Timer.prototype.isStoped = function() {
+  return this._stoped;
+};
+
+
+Timer.prototype._end = function() {
+  return gethrtime(this._begin) - this._paused;
+};
 
 
 

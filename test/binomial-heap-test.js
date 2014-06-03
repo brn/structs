@@ -31,6 +31,7 @@ describe('BinomialHeap', function() {
         a.push(v);
         instance.insert(v);
       }
+      assert.strictEqual(instance.length, 30);
       a.sort(function(a,b){return a > b? 1: a === b?0: -1});
       var x = [];
 
@@ -60,6 +61,7 @@ describe('BinomialHeap', function() {
       var instanceA = createHeap();
       var instanceB = createHeap();
       var ret = instanceA.merge(instanceB);
+      assert.strictEqual(ret.length, index * 2);
       a.sort(function(a,b){return a > b? 1: a === b?0: -1});
       var x = [];
 

@@ -18,34 +18,56 @@ function randomIntInc (low, high) {
 module.exports = function(cb) {
   perfHarness([
     {
-      name: '[binomial-heap] random values',
-      test: function(cb) {
+      name: '[binomial-heap] insert random values',
+      test: function(timer, cb) {
         var instance = new BinomialHeap(Element.compare);
         for (var i = 0; i < order; i++) {
           instance.insert(new Element(randomIntInc(0, order)));
         }
-        for (i = 0; i < order; i++) {
+        cb();
+      }
+    },
+    {
+      name: '[binomial-heap] insert ordered values',
+      test: function(timer, cb) {
+        var instance = new BinomialHeap(Element.compare);
+        for (var i = 0; i < order; i++) {
+          instance.insert(new Element(i));
+        }
+        cb();
+      }
+    },
+    {
+      name: '[binomial-heap] pop',
+      test: function(timer, cb) {
+        var instance = new BinomialHeap(Element.compare);
+        for (var i = 0; i < order; i++) {
+          instance.insert(new Element(i));
+        }
+        timer.begin();
+        for (var i = 0; i < order; i++) {
           instance.pop();
         }
         cb();
       }
     },
     {
-      name: '[binomial-heap] ordered values',
-      test: function(cb) {
+      name: '[binomial-heap] peek',
+      test: function(timer, cb) {
         var instance = new BinomialHeap(Element.compare);
         for (var i = 0; i < order; i++) {
           instance.insert(new Element(i));
         }
-        for (i = 0; i < order; i++) {
-          instance.pop();
+        timer.begin();
+        for (var i = 0; i < order; i++) {
+          instance.peek();
         }
         cb();
       }
     },
     {
       name: '[binomial-heap] merge',
-      test: function(cb) {
+      test: function(timer, cb) {
         function createHeap() {
           var instance = new BinomialHeap(Element.compare);
           for (var i = 0; i < 10; i++) {
@@ -55,8 +77,10 @@ module.exports = function(cb) {
         }
 
         for (var i = 0; i < order; i++) {
+          timer.stop();
           var a = createHeap();
           var b = createHeap();
+          timer.resume();
           a.merge(b);
         }
         cb();
